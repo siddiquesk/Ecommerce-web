@@ -12,7 +12,7 @@ import Navbar from './component/Navbar';
 import Contact from './pages/Contact';
 import Footer from './component/Footer';
 import SearchBar from './component/SearchBar';
-import { ToastContainer, toast } from 'react-toastify';
+ import { ToastContainer, toast } from 'react-toastify';
 function App() {
   return (
     <>
