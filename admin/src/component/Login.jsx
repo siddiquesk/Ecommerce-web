@@ -1,25 +1,30 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import { backendUrl } from '../App';
- import {toast} from 'react-toastify';
-function Login({setToken}) {
-  const [email,setEmail]=useState('');
-   const [password,setPassword]=useState('');
+import React, { useState } from "react";
+import axios from "axios";
+import { backendUrl } from "../App";
+import { toast } from "react-toastify";
+function Login({ setToken }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const hadleSubmit = async (e) => {
     try {
       e.preventDefault();
-       const response =await axios.post(backendUrl+'/api/user/admin',{email,password});
-        if(response.data.success){
-          toast.success(response.data.m)
-          setToken(response.data.token);
-          console.log(response.data);
-        }else{
-          console.log(response.data.message);
-        }
+      const response = await axios.post(backendUrl + "/api/user/admin", {
+        email,
+        password,
+      });
+      if (response.data.success) {
+        setToken(response.data.token);
+        toast.success(response.data.message);
+        console.log(response.data);
+      } else {
+        console.log(response.data.message);
+        toast.error(response.data.message);
+      }
     } catch (err) {
-       console.log(err.message);
+      console.log(err.message);
+      toast.error(err.message);
     }
-  }
+  };
   return (
     <div className="flex min-h-screen items-center justify-center w-full px-4 sm:px-6 lg:px-8">
       <div className="bg-white shadow-md rounded-lg w-full max-w-sm sm:max-w-md md:max-w-lg p-6 sm:p-8">
@@ -29,40 +34,42 @@ function Login({setToken}) {
         <form onSubmit={hadleSubmit}>
           {/* Email */}
           <div className="mb-4">
-            <p className="text-sm font-medium text-gray-700 mb-1 sm:mb-2">Email Address</p>
+            <p className="text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+              Email Address
+            </p>
             <input
               type="email"
               placeholder="Your@gmail.com"
               required
               className="rounded-md w-full border px-3 py-2 border-gray-300 outline-none"
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           {/* Password */}
           <div className="mb-4">
-            <p className="text-sm font-medium text-gray-700 mb-1 sm:mb-2">Password</p>
+            <p className="text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+              Password
+            </p>
             <input
               type="password"
               placeholder="Enter your password"
               required
               className="rounded-md w-full border px-3 py-2 border-gray-300 outline-none "
-                onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
           {/* Button */}
           <button
             type="submit"
-            className="mt-2 w-full py-2 px-4 cursor-pointer rounded-md text-white bg-black hover:bg-gray-900 transition"
-          >
+            className="mt-2 w-full py-2 px-4 cursor-pointer rounded-md text-white bg-black hover:bg-gray-900 transition">
             Login
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
-
+export default Login;

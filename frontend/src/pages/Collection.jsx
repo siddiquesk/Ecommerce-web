@@ -39,7 +39,7 @@ function Collection() {
   useEffect(() => {
     applyFilter();
     console.log("category ", category);
-  }, [category, serach, showSearch])
+  }, [category, serach, showSearch, products])
 
   const sortProduct = () => {
     let fpyCopy = filterProduct.slice();
