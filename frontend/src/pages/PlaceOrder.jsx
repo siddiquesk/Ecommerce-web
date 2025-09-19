@@ -39,6 +39,34 @@ function PlaceOrder() {
     setFormData((data) => ({ ...data, [name]: value }));
   };
 
+  // const initPay = (order) => {
+  //   const options = {
+  //     key: import.meta.env.VITE_RAZOR_PAY,
+  //     amount: order.amount,
+  //     currency: order.currency,
+  //     description: order.id,
+  //     reciept: order.receipt,
+  //     handler: async (response) => {
+  //       console.log(response);
+  //       try {
+  //         const { data } = await axios.post(
+  //           backendUrl + "/api/order/verifyRazorpay",
+  //           response,
+  //           { headers: { token } }
+  //         );
+  //         if (data.success) {
+  //           navigate('/orders');
+  //           setCartItem({});
+  //         }
+  //       } catch (err) {
+  //         console.log(err);
+  //         toast.error(err.message);
+  //       }
+  //     }
+  //   }
+  //   const rzp = new (window.Razorpay(options));
+  //   rzp.open()
+  // }
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -91,6 +119,19 @@ function PlaceOrder() {
             toast.error(responseStripe.data.message);
           }
           break;
+        // case 'razorpay':
+        //   const responseRazorpay = await axios.post(
+        //     backendUrl + "/api/order/razorpay",
+        //     orderData,
+        //     { headers: { token } }
+        //   );
+        //   if (responseRazorpay.data.success) {
+        //     initPay(responseRazorpay.data.order);
+
+        //   } else {
+        //     toast.error(responseStripe.data.message);
+        //   }
+        //   break;
         default:
           break;
       }

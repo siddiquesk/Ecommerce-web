@@ -40,7 +40,6 @@ const registerUser = async (req, res) => {
      const token =createToken(user._id);
      return res.json({success:true,message:'User registred successfully',token});
   } catch (err) {
-    console.log(err.message);
      return res.json({success:false,message:'User registred Failed'});
   }
 };
@@ -63,7 +62,6 @@ const loginUser = async (req, res) => {
      }
 
   } catch (err) {
-    console.log(err.message);
      return res.json({success:false,message:'User Login Failed'});
   }
 };

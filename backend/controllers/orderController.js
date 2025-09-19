@@ -1,7 +1,9 @@
 import Order from "../models/orderModel.js";
 import User from "../models/userModel.js";
 import Stripe from "stripe";
+//import razorpay from 'razorpay'
 import dotenv from "dotenv";
+
 dotenv.config();
 
 //getway initilize here
@@ -9,6 +11,13 @@ const stripe = new Stripe(process.env.STRIPE_KEY);
 console.log(process.env.STRIPE_KEY);
 const currency = "inr";
 const deliveryCharge = 10;
+
+
+//razorpay config
+// const razorpayinstance = new razorpay({
+//   key_id:process.env.razorpay_secret,
+//   key_secret:process.env.razorpay_secret,
+// })
 
 //placing order using cod method
 const placeOrder = async (req, res) => {
@@ -27,7 +36,6 @@ const placeOrder = async (req, res) => {
     await User.findByIdAndUpdate(userId, { cartData: {} });
     res.json({ success: true, message: "Order Placed" });
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };
@@ -77,7 +85,6 @@ const placeOrderStripe = async (req, res) => {
 
     res.json({ success: true, session_url: session.url });
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };
@@ -94,13 +101,59 @@ const verifyStripe =async(req,res)=>{
       res.json({success:false});
      }
   }catch(err){
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 }
 
 //placing order using razorpay  method
-const placeOrderrazorpay = async (req, res) => {};
+const placeOrderrazorpay = async (req, res) => {
+  // try{
+  //   const { userId, items, amount, address } = req.body;
+  //   const { origin } = req.headers;
+  //   const orderData = {
+  //     userId,
+  //     items,
+  //     address,
+  //     amount,
+  //     paymentMethod: "Razorpay",
+  //     payment: false,
+  //     date: Date.now(),
+  //   };
+  //   const newOrder = new Order(orderData);
+  //   await newOrder.save();
+  //   const options={
+  //     amount:amount*100,
+  //     currency:currency.toUpperCase(),
+  //     reciept:newOrder._id.toString(),
+  //   }
+  //   await razorpayinstance.orders.create(options,(error,order)=>{
+  //     if(err){
+  //       console.log(err);
+  //       return res.json({success:false,message:err});
+  //     }
+  //     res.json({success:true,})
+  //   })
+  // }catch(err){
+  //   res.json({ success: false, message: err.message });
+  // }
+};
+
+const verifyRazorpay =async(req,res)=>{
+  // try{
+  //  const {userId,razorpay_order_id}=req.body;
+  //  const orderInfo = await razorpayinstance.orders.fetch(razorpay_order_id);
+  //  console.log(orderInfo);
+  //  if(orderInfo.status === 'paid'){
+  //   await Order.findByIdAndUpdate(orderInfo.receipt,{payment:true});
+  //   await User.findByIdAndUpdate(userId,{cartData:{}});
+  //   res.json({success:true,message:'Payment Successfull'})
+  //  }else{
+  //   res.json({ success: false, message: 'Payment Failed' });
+  //  }
+  // }catch(err){
+  //  res.json({ success: false, message: err.message });
+  // }
+}
 
 //all orders data for admin panel
 const allOrders = async (req, res) => {
@@ -108,7 +161,6 @@ const allOrders = async (req, res) => {
     const orders = await Order.find({});
     res.json({ success: true, orders });
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };
@@ -118,10 +170,8 @@ const userOrders = async (req, res) => {
   try {
     const { userId } = req.body;
     const orders = await Order.find({ userId });
-    console.log("orders backend", orders);
     res.json({ success: true, orders });
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };
@@ -130,11 +180,9 @@ const userOrders = async (req, res) => {
 const upadteStatus = async (req, res) => {
   try {
     const { orderId, status } = req.body;
-
     await Order.findByIdAndUpdate(orderId, { status });
     res.json({ success: true, message: "Satus Updated" });
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };
@@ -147,4 +195,5 @@ export {
   upadteStatus,
   userOrders,
   verifyStripe,
+  verifyRazorpay,
 };

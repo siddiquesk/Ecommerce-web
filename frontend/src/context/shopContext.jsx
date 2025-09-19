@@ -106,7 +106,6 @@ const ShopContextProvider = (props) => {
         toast.error(response.data.message);
       }
     } catch (err) {
-      console.log(err);
       toast.error(err.message);
     }
   };
@@ -114,12 +113,10 @@ const ShopContextProvider = (props) => {
   const getUserCart = async (token) => {
     try {
       const response = await axios.post(backendUrl + '/api/cart/get', {}, { headers: { token } });
-      console.log('cart get resposne', response);
       if (response.data.success) {
         setCartItem(response.data.cartData);
       }
     } catch (err) {
-      console.log(err);
       toast.error(err.message);
     }
   }

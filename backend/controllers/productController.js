@@ -45,9 +45,6 @@ const addProduct = async (req, res) => {
       product: savedProduct,
     });
   } catch (error) {
-    console.error("❌ Error in addProduct:", error.message);
-
-    // ❌ Error response
     return res.status(500).json({
       success: false,
       message: "Failed to add product",

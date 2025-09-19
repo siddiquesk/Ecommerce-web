@@ -7,14 +7,10 @@ const authCart = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded JWT:", decoded);
-
-    // id ya _id dono handle karo
     req.body.userId = decoded._id || decoded.id;
 
     next();
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };

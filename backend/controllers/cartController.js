@@ -27,7 +27,6 @@ const addTocart = async (req, res) => {
     res.json({ success: true, message: "Added To Cart successfully" });
 
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };
@@ -42,7 +41,6 @@ const updateTocart = async (req, res) => {
     await User.findByIdAndUpdate(userId, { cartData });
     res.json({ success: true, message: "Cart Updated succefully" });
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };
@@ -54,7 +52,6 @@ const getUsercart = async (req, res) => {
   let cartData = await userData.cartData;
     res.json({ success: true, cartData });
   } catch (err) {
-    console.log(err);
     res.json({ success: false, message: err.message });
   }
 };

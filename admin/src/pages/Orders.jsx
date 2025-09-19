@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { assets } from '../assets/assets';
 function Orders({ token }) {
   const [order, setOrder] = useState([]);
-  //Suf!Y@n#2025Xy ->my passwword
   const fetchAllOrder = async () => {
     if (!token) {
       return null
@@ -13,7 +12,7 @@ function Orders({ token }) {
     try {
       const response = await axios.post(backendUrl + '/api/order/list', {}, { headers: { token } });
       if (response.data.success) {
-        setOrder(response.data.orders);
+        setOrder(response.data.orders.reverse());
       } else {
         toast.error(response.data.message);
       }
