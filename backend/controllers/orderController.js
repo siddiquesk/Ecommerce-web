@@ -106,54 +106,54 @@ const verifyStripe =async(req,res)=>{
 }
 
 //placing order using razorpay  method
-const placeOrderrazorpay = async (req, res) => {
-  // try{
-  //   const { userId, items, amount, address } = req.body;
-  //   const { origin } = req.headers;
-  //   const orderData = {
-  //     userId,
-  //     items,
-  //     address,
-  //     amount,
-  //     paymentMethod: "Razorpay",
-  //     payment: false,
-  //     date: Date.now(),
-  //   };
-  //   const newOrder = new Order(orderData);
-  //   await newOrder.save();
-  //   const options={
-  //     amount:amount*100,
-  //     currency:currency.toUpperCase(),
-  //     reciept:newOrder._id.toString(),
-  //   }
-  //   await razorpayinstance.orders.create(options,(error,order)=>{
-  //     if(err){
-  //       console.log(err);
-  //       return res.json({success:false,message:err});
-  //     }
-  //     res.json({success:true,})
-  //   })
-  // }catch(err){
-  //   res.json({ success: false, message: err.message });
-  // }
-};
+// const placeOrderrazorpay = async (req, res) => {
+//   try{
+//     const { userId, items, amount, address } = req.body;
+//     const { origin } = req.headers;
+//     const orderData = {
+//       userId,
+//       items,
+//       address,
+//       amount,
+//       paymentMethod: "Razorpay",
+//       payment: false,
+//       date: Date.now(),
+//     };
+//     const newOrder = new Order(orderData);
+//     await newOrder.save();
+//     const options={
+//       amount:amount*100,
+//       currency:currency.toUpperCase(),
+//       reciept:newOrder._id.toString(),
+//     }
+//     await razorpayinstance.orders.create(options,(error,order)=>{
+//       if(err){
+//         console.log(err);
+//         return res.json({success:false,message:err});
+//       }
+//       res.json({success:true,})
+//     })
+//   }catch(err){
+//     res.json({ success: false, message: err.message });
+//   }
+// };
 
-const verifyRazorpay =async(req,res)=>{
-  // try{
-  //  const {userId,razorpay_order_id}=req.body;
-  //  const orderInfo = await razorpayinstance.orders.fetch(razorpay_order_id);
-  //  console.log(orderInfo);
-  //  if(orderInfo.status === 'paid'){
-  //   await Order.findByIdAndUpdate(orderInfo.receipt,{payment:true});
-  //   await User.findByIdAndUpdate(userId,{cartData:{}});
-  //   res.json({success:true,message:'Payment Successfull'})
-  //  }else{
-  //   res.json({ success: false, message: 'Payment Failed' });
-  //  }
-  // }catch(err){
-  //  res.json({ success: false, message: err.message });
-  // }
-}
+// const verifyRazorpay =async(req,res)=>{
+//   try{
+//    const {userId,razorpay_order_id}=req.body;
+//    const orderInfo = await razorpayinstance.orders.fetch(razorpay_order_id);
+//    console.log(orderInfo);
+//    if(orderInfo.status === 'paid'){
+//     await Order.findByIdAndUpdate(orderInfo.receipt,{payment:true});
+//     await User.findByIdAndUpdate(userId,{cartData:{}});
+//     res.json({success:true,message:'Payment Successfull'})
+//    }else{
+//     res.json({ success: false, message: 'Payment Failed' });
+//    }
+//   }catch(err){
+//    res.json({ success: false, message: err.message });
+//   }
+// }
 
 //all orders data for admin panel
 const allOrders = async (req, res) => {
@@ -190,10 +190,8 @@ const upadteStatus = async (req, res) => {
 export {
   placeOrder,
   placeOrderStripe,
-  placeOrderrazorpay,
   allOrders,
   upadteStatus,
   userOrders,
   verifyStripe,
-  verifyRazorpay,
 };

@@ -2,12 +2,10 @@ import express from "express";
 import {
   placeOrder,
   placeOrderStripe,
-  placeOrderrazorpay,
   allOrders,
   upadteStatus,
   userOrders,
   verifyStripe,
-  verifyRazorpay,
 } from "../controllers/orderController.js";
 import adminAuth from "../middleware/adminAuth.js";
 import authCart from '../middleware/authCart.js';
@@ -21,10 +19,10 @@ orderRouter.post('/status',adminAuth,upadteStatus);
 //payment feature here
 orderRouter.post('/place',authCart,placeOrder);
 orderRouter.post('/stripe',authCart,placeOrderStripe);
-orderRouter.post('/razorpay',authCart,placeOrderrazorpay);
+//orderRouter.post('/razorpay',authCart,placeOrderrazorpay);
 //verify stripe
 orderRouter.post('/verifyStripe',authCart,verifyStripe);
-orderRouter.post('/verifyRazorpay',authCart,verifyRazorpay);
+//orderRouter.post('/verifyRazorpay',authCart,verifyRazorpay);
 //User Feature
 orderRouter.post('/userorders',authCart,userOrders);
 
