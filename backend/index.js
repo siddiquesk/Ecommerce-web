@@ -18,17 +18,8 @@ connectCloudinary();
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-const corsOptions = {
-  origin: [
-    "http://localhost:5173",   // local frontend
-    "http://localhost:5174",   // local frontend (2nd)
-    "https://luxury-shervani.vercel.app",  // deployed frontend
-    "https://ecommerce-luxurys.vercel.app" // deployed backend (self-check if needed)
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-};
-app.use(cors(corsOptions));
+app.use(cors());
+
 
 
 
