@@ -22,7 +22,6 @@ const corsOptions = {
   origin: [
     "http://localhost:5174",
     "http://localhost:5173",
-    "https://ecommerce-admin-web-blond.vercel.app"  // ✅ deployed frontend URL
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
