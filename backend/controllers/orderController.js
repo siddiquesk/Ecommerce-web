@@ -1,14 +1,11 @@
 import Order from "../models/orderModel.js";
 import User from "../models/userModel.js";
 import Stripe from "stripe";
-//import razorpay from 'razorpay'
 import dotenv from "dotenv";
-
 dotenv.config();
 
 //getway initilize here
 const stripe = new Stripe(process.env.STRIPE_KEY);
-console.log(process.env.STRIPE_KEY);
 const currency = "inr";
 const deliveryCharge = 10;
 
@@ -72,7 +69,7 @@ const placeOrderStripe = async (req, res) => {
         product_data: {
           name: "Delivery Charges",
         },
-        unit_amount:deliveryCharge,
+       unit_amount: deliveryCharge * 100,
       },
       quantity: 1,
     });
